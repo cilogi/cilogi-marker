@@ -155,12 +155,13 @@ cilogi.fn = cilogi.fn || {};
             
             var subDiv = document.createElement('div');
             subDiv.className = this.options.computeClass();
+            subDiv.innerHTML = this.options.fontIconName;
 
             div.appendChild(subDiv);
 
             var span = document.createElement("span");
             span.className = "shine";
-            span.innerHTML = this.options.fontIconName;
+            //span.innerHTML = this.options.fontIconName;
             subDiv.appendChild(span);
             adjustLineHeight(subDiv, this.options.fontIconFont, this.options.fontIconName);
 
@@ -200,20 +201,35 @@ cilogi.fn = cilogi.fn || {};
         pointerUp   = L.Browser.touch ? 'touchend'   : 'mouseup',
         pointerOut  = L.Browser.touch ? 'touchcancel' : 'mouseout';
 
-        function tmpOpacity(elem, startOpacity, stopOpacity) {
-            var ms = 2000,
-                interval = 100,
+        function tmpOpacity(ms, elem, startOpacity, stopOpacity) {
+            var interval = 25,
                 msDone = 0,
                 id = setInterval(frame, interval),
-                currentOpacity = startOpacity;
+                currentOpacity = startOpacity,
+                spans = elem.getElementsByTagName('span'),
+                init = true;;
+
+            // hack, but android can't cope with the gradient and opacity
+            function setSpans(val) {
+                if (L.Browser.android23) {
+                    for (var i = 0; i < spans.length; i++) {
+                        spans[i].style.visibility = val;
+                    }
+                }
+            }
 
             function frame() {
                 L.DomUtil.setOpacity(elem, currentOpacity);
+                if (init) {
+                    setSpans("hidden");
+                    init = false;
+                }
                 msDone += interval;  // update parameters
                 currentOpacity = startOpacity + (stopOpacity - startOpacity) * msDone/ms;
                 if (msDone >= ms) { // check finish condition
                     clearInterval(id);
                     L.DomUtil.setOpacity(elem, stopOpacity);
+                    setSpans("visible");
                 }
             }
         }
@@ -245,7 +261,7 @@ cilogi.fn = cilogi.fn || {};
         },
         
         _tmpOpacity : function() {
-            tmpOpacity(this._icon, 0.3, 1.0);
+            tmpOpacity(this.options.fadeTime || 1000, this._icon, 0.3, 1.0);
         },
         setFeatureOptions : function(options) {
             var opt = L.Util.extend({}, this.options.icon.options, options);

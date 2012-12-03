@@ -125,12 +125,13 @@
             
             var subDiv = document.createElement('div');
             subDiv.className = this.options.computeClass();
+            subDiv.innerHTML = this.options.fontIconName;
 
             div.appendChild(subDiv);
 
             var span = document.createElement("span");
             span.className = "shine";
-            span.innerHTML = this.options.fontIconName;
+            //span.innerHTML = this.options.fontIconName;
             subDiv.appendChild(span);
             adjustLineHeight(subDiv, this.options.fontIconFont, this.options.fontIconName);
 
