@@ -9,3 +9,7 @@ adjust the size of the marker to the map level being displayed.
 
 This [demo](http://cilogi.github.com/cilogi-marker/index.html)
 shows the main features of the markers, and provides information on the API.
+
+The CSS markers won't work everywhere, and won't work in exactly the same way
+everywhere, due to variations between browsers.  I'd be grateful for any observations on
+browsers, particularly mobile browsers, where the markers don't work properly.
