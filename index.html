@@ -17,13 +17,13 @@
     <!--[if lte IE 8]><link rel="stylesheet" href="css/libs/leaflet.markercluster/MarkerCluster.Default.ie.css" /><![endif]-->
 
 
-    <link rel='stylesheet' href='dist/font/iconic/iconic_stroke.css' type='text/css'/>
-    <link rel='stylesheet' href='dist/font/font-awesome/css/font-awesome.css' type='text/css'/>
+    <link rel='stylesheet' href='../dist/font/iconic/iconic_stroke.css' type='text/css'/>
+    <link rel='stylesheet' href='../dist/font/font-awesome/css/font-awesome.css' type='text/css'/>
 
     <!--[if lt IE 9]><script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
 
     <!-- First include the CSS for the font markers -->
-    <link href="dist/cilogi-marker.css" rel="stylesheet">
+    <link href="../dist/cilogi-marker.css" rel="stylesheet">
 </head>
 
 <body>
@@ -108,11 +108,11 @@
 </div> <!-- /container -->
 
 
-<script src="js/libs/leaflet.js"></script>
+<script src="js/libs/leaflet-src.js"></script>
 <script src="js/libs/leaflet.markercluster/leaflet.markercluster.js"></script>
 
 <!-- Then include the JavaScript -->
-<script src="dist/cilogi-marker.min.js"></script>
+<script src="../dist/cilogi-marker.js"></script>
 <script src="js/libs/jquery-1.8.3.min.js"></script>
 
 
@@ -127,7 +127,7 @@
             }),
             markers = [];
 
-         map = L.map('map').setView([55.879181,-4.290292], 16).addLayer(cloudmade);
+         map = L.map('map').setView([55.879181,-4.290292], 17).addLayer(cloudmade);
 
         addMarker(new L.LatLng(55.879307,-4.290365), {icon: "\ue070", color: "#ff0000"});
         addMarker(new L.LatLng(55.878844,-4.28909), {icon: "\ue025", color: "#00ff00"});
@@ -170,7 +170,8 @@
                     fontIconSize: sz,
                     fontIconName: icon,
                     fontIconColor: color,
-                    fontIconFont: font
+                    fontIconFont: font,
+                    opacity: 1
                 });
             drawnItems.addLayer(marker);
             markers.push(marker);
