@@ -203,15 +203,15 @@ cilogi.fn = cilogi.fn || {};
         function tmpOpacity(elem, startOpacity, stopOpacity) {
             var ms = 2000,
                 interval = 100,
-                msLeft = ms,
+                msDone = 0,
                 id = setInterval(frame, interval),
                 currentOpacity = startOpacity;
 
             function frame() {
                 L.DomUtil.setOpacity(elem, currentOpacity);
-                msLeft -= interval;  // update parameters
-                currentOpacity = 1 - (stopOpacity - startOpacity) * msLeft/ms;
-                if (msLeft <= 0) { // check finish condition
+                msDone += interval;  // update parameters
+                currentOpacity = startOpacity + (stopOpacity - startOpacity) * msDone/ms;
+                if (msDone >= ms) { // check finish condition
                     clearInterval(id);
                     L.DomUtil.setOpacity(elem, stopOpacity);
                 }
