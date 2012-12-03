@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Font-based icons for Leaflet markers</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <link href="css/libs/bootstrap.min.css" rel="stylesheet">
+    <link href="css/libs/bootstrap-responsive.min.css" rel="stylesheet">
+    <link href="css/libs/leaflet/leaflet.css" rel="stylesheet">
+    <!--[if lte IE 8]><link rel="stylesheet" href="css/libs/leaflet/leaflet.ie.css" /><![endif]-->
+
+    <link rel="stylesheet" href="css/libs/leaflet.markercluster/MarkerCluster.css" />
+    <link rel="stylesheet" href="css/libs/leaflet.markercluster/MarkerCluster.Default.css" />
+    <!--[if lte IE 8]><link rel="stylesheet" href="css/libs/leaflet.markercluster/MarkerCluster.Default.ie.css" /><![endif]-->
+
+
+    <link rel='stylesheet' href='../dist/font/iconic/iconic_stroke.css' type='text/css'/>
+    <link rel='stylesheet' href='../dist/font/font-awesome/css/font-awesome.css' type='text/css'/>
+
+    <!--[if lt IE 9]><script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+    <!-- First include the CSS for the font markers -->
+    <link href="../dist/cilogi-marker.css" rel="stylesheet">
+</head>
+
+<body>
+<div class="container">
+
+    <div class="row">
+        <div class="span9">
+            <h3>Font icons for Leaflet markers</h3>
+            <div id="map" style="width:400px; height:400px;"></div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="span9">
+          <h4>Motivation</h4>
+          <p>These markers use font glyphs as icons.  This lets you display markers at any
+             size without degradation of quality.  You don't need to worry about the
+            resolution of the display, retina displays work as well as any other, and you can
+            adjust the size of the marker to the map level being displayed.</p>.
+
+          <h4>This demo</h4>
+
+          <p>The demo shows the font markers using two fonts, <a href="http://somerandomdude.com/work/iconic/">Iconic</a>
+             and <a href="http://fortawesome.github.com/Font-Awesome/">Font Awesome</a>.  The Font Awesome markers are
+             to the right of the Iconic markers and slightly darker.</p>
+          <p>The features displayed by the demo include:
+             <ul>
+                <li>At low map levels the marker is displayed using just a  glyph (pin by default), to save space.</li>
+                <li>At higher levels, where the separation between markers is higher,  a <em>bubble icon</em> is used,
+                    styled with CSS</li>
+                <li>The marker size can vary depending on the map level being displayed.</li>
+                <li>Any suitable icon font can be used as a source of glyphs.</li>
+             </ul></p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="span9">
+        <h4>Usage</h4>
+        <p>In order to show font markers you need to include the <code>cilogi-marker.css</code> file in the header
+           of your page, as well at the <code>cilogi-marker.min.js</code> JavaScript file.  This file needs to be
+           included after the JavaScript for the Leaflet library.  There are no other dependencies.</p>
+        <p>You create  a new marker as follows:
+            <pre><code>
+    new cilogi.L.Marker(latLng, {
+        &lt;options&gt;
+    });
+            </code></pre>
+            The options are:
+            <ul>
+            <li><code>fontIconSize</code>. The font-size of the glyph in <em>em</em>s.  The size of
+                an <em>em</em> will be specified in a parent element.  If you wish the size of the marker
+                to vary with level it is usual to have a function which computes the size at each level and
+                to pass in the value of this function at the current map level. The function used in this demo is:
+                <pre><code>
+    function computeSizeFromZoom() {
+        var max = map.getMaxZoom(),
+            zoom = map.getZoom(),
+            diff = max - zoom,
+            table = [2, 1, 0.5];.
+        return  (diff &lt; table.length) ? table[diff] : 0.5;
+    }
+                </code></pre>
+                The <code>table</code> variable specifies a font size of 2 at the maximum zoom level of the map,
+                a font size of 1 at the next lower level, and 0.5 thereafter.  By default a value of 0.5 or lower will
+                show a pin glyph without bubble.
+            </li>
+            <li><code>fontIconFont</code>. The name of the font to which the glyph belongs.
+                The default is <em>iconic</em>, which is supplied in the distribution.</li>
+            <li><code>fontIconColor</code>. The base color of the bubble, or of the glyph is there is no bubble.  The default is <em>blue</em>.
+                In addition to color names you can also supply colors of the form <em>#rrggbb</em>.</li>
+            <li><code>fontIconName</code>. The character value of the font glyph when showing a bubble.  The default is a map pin for <em>iconic</em>
+                and <em>awesome</em> and an error value for other fonts.  If the <em>fontIconName</em> is the same as the <em>altIconName</em>
+                then a glyph-only marker is shown at all sizes.</li>
+            <li><code>altIconName</code>.  The glyph to be shown for glyph-only display, when the map level is low (i.e. a large area shown. The
+                default for the <em>iconic</em> and <em>awesome</em> fonts is a map pin.</li>
+            <li><code>altThresh</code>.  The font size threshold at which the glyph-only version of the marker is shown.  This will
+                show the <em>altIconName</em> glyph when <em>fontIconSize</em> is at or below this threshold.
+            </ul>
+        </p>
+        <p>The code for producing the icons in the demo are</p>
+        </div>
+    </div>
+</div> <!-- /container -->
+
+
+<script src="js/libs/leaflet.js"></script>
+<script src="js/libs/leaflet.markercluster/leaflet.markercluster.js"></script>
+
+<!-- Then include the JavaScript -->
+<script src="../dist/cilogi-marker.min.js"></script>
+<script src="js/libs/jquery-1.8.3.min.js"></script>
+
+
+<script>
+    $(document).ready(function() {
+        var map,
+            cloudmadeUrl = 'http://{s}.tile.cloudmade.com/BC9A493B41014CAABB98F0471D759707/997/256/{z}/{x}/{y}.png',
+            cloudmadeAttribution = 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery &copy; <a href="http://cloudmade.com">CloudMade</a>',
+            cloudmade = new L.TileLayer(cloudmadeUrl, {maxZoom: 18, attribution: cloudmadeAttribution}),
+            drawnItems = new L.MarkerClusterGroup({
+                disableClusteringAtZoom: 16
+            }),
+            markers = [];
+
+         map = L.map('map').setView([55.879181,-4.290292], 16).addLayer(cloudmade);
+
+        addMarker(new L.LatLng(55.879307,-4.290365), {icon: "\ue070", color: "#ff0000"});
+        addMarker(new L.LatLng(55.878844,-4.28909), {icon: "\ue025", color: "#00ff00"});
+        addMarker(new L.LatLng(55.878043,-4.289701), {icon: "\u2605", color: "#0000ff"});
+
+        addMarker(new L.LatLng(55.879608,-4.292264), {icon: "\ue002", color: "#8B668B"}); // pint only display
+
+        addMarker(new L.LatLng(55.879289,-4.289695), {icon: "\uf030", color: "#990000", iconFont: 'awesome'}); //camera
+        addMarker(new L.LatLng(55.878859,-4.288494), {icon: "\uf06e", color: "#009900", iconFont: 'awesome'}); // eye open
+        addMarker(new L.LatLng(55.878073,-4.289277), {icon: "\uf005", color: "#000099", iconFont: 'awesome'}); // star
+
+        addMarker(new L.LatLng(55.87962,-4.291504), {icon: "\uf041", color: "#4F2F4F", iconFont: 'awesome'}); // pin only
+
+        map.addLayer(drawnItems);
+
+        map.on("viewreset", function() {
+            var zoom = map.getZoom(),
+                size = computeSizeFromZoom();
+            //console.log("resize, zoom " + zoom + " size " + size);
+            for (var i = 0; i < markers.length; i++) {
+                markers[i].setFontSize(size);
+            }
+       });
+
+        function computeSizeFromZoom() {
+            var max = map.getMaxZoom(),
+                zoom = map.getZoom(),
+                diff = max - zoom,
+                table = [2, 1, 0.5];
+            return  (diff < table.length) ? table[diff] : 0.5;
+        }
+
+        function addMarker(latLng, opts) {
+            var icon = opts.icon || "\ue002",
+                color = opts.color || "blue",
+                font = opts.iconFont || "iconic",
+                sz = computeSizeFromZoom();
+
+                marker = new cilogi.L.Marker(latLng, {
+                    fontIconSize: sz,
+                    fontIconName: icon,
+                    fontIconColor: color,
+                    fontIconFont: font
+                });
+            drawnItems.addLayer(marker);
+            markers.push(marker);
+        }
+
+    });
+
+</script>
+</body>
+</html>
