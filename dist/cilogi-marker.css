@@ -1,0 +1,108 @@
+.awesome {
+    display: inline-block;
+    font-family: 'FontAwesome';
+    line-height: 1.5em;
+}
+
+.iconic {
+    line-height: 1.33em;    
+}
+
+.triangle-isosceles {
+    width: 0;
+    height: 0;
+    position: absolute;
+    padding: 1em;
+    margin: 0;
+    color: black;
+    -webkit-border-radius: 0.3em;
+    -moz-border-radius: 0.3em;
+    border-radius: 0.3em;
+
+    -moz-box-shadow: 0 0 0 1px #000000;
+    -webkit-box-shadow: 0 0 0 1px #000000;
+    -o-box-shadow: 0 0 0 1px #000000;
+    -ms-box-shadow: 0 0 0 1px #000000;
+}
+
+.triangle-isosceles-after {
+    position: absolute;
+    bottom: -0.5em; /* value = - border-top-width - border-bottom-width */
+
+    left: 0.5em; /* controls horizontal position */
+
+    border-width: 0.5em 0.5em 0; /* vary these values to change the angle of the vertex */
+
+    border-style: solid;
+
+    display: block;
+    width: 0em;
+
+    border-right-color: transparent;
+    border-left-color: transparent;
+}
+
+
+.bubble {
+    font-size: 1.5em;
+    color: white;
+    vertical-align: middle;
+    text-align: center;
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0em;
+    top: 0em;
+}
+
+.shine {
+    position: absolute;
+    display: block;
+    width: 100%;
+    top: 0px;
+    height: 50%;
+    -webkit-border-radius: 0.2em;
+    -moz-border-radius: 0.2em;
+    border-radius: 0.2em;
+    background-color: rgba(255, 255, 255, 0.15);
+    background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(rgba(255, 255, 255, 0.8)), to(rgba(255, 255, 255, 0)));
+    background-image: -moz-linear-gradient(top, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0));
+    background-image: -o-linear-gradient(#ffffffff, #00ffffff);
+    background-image: -ms-linear-gradient(#ffffffff, #00ffffff);
+    background-image: linear-gradient(to bottom, #ffffffff, #00ffffff);
+    filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr='#ffffffff', endColorstr='#00ffffff');
+}
+
+
+.red {
+    color: red;
+}
+
+.blue {
+    color: blue;
+}
+
+.green {
+    color: green;
+}
+
+.white {
+    color: white;
+}
+
+.leaflet-marker-pane {
+    font-size: 12px;
+}
+
+.leaflet-popup .form-horizontal .control-label {
+    width: 40px;
+}
+
+.leaflet-popup .form-horizontal .controls {
+    margin-left: 60px;
+}
+
+
+
+
