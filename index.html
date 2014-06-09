@@ -119,15 +119,15 @@
 <script>
     $(document).ready(function() {
         var map,
-            cloudmadeUrl = 'http://{s}.tile.cloudmade.com/BC9A493B41014CAABB98F0471D759707/997/256/{z}/{x}/{y}.png',
-            cloudmadeAttribution = 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery &copy; <a href="http://cloudmade.com">CloudMade</a>',
-            cloudmade = new L.TileLayer(cloudmadeUrl, {maxZoom: 18, attribution: cloudmadeAttribution}),
+            mapnikUrl = 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+            mapnikAttribution = 'OpenStreetMap contributors: <a href="http://www.openstreetmap.org/copyright">license</a>',
+            mapnik = new L.TileLayer(mapnikUrl, {maxZoom: 18, attribution: mapnikAttribution}),
             drawnItems = new L.MarkerClusterGroup({
                 disableClusteringAtZoom: 16
             }),
             markers = [];
 
-         map = L.map('map').setView([55.879181,-4.290292], 17).addLayer(cloudmade);
+         map = L.map('map').setView([55.879181,-4.290292], 17).addLayer(mapnik);
 
         addMarker(new L.LatLng(55.879307,-4.290365), {icon: "\ue070", color: "#ff0000"});
         addMarker(new L.LatLng(55.878844,-4.28909), {icon: "\ue025", color: "#00ff00"});
