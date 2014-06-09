@@ -39,18 +39,18 @@
         <div class="span9">
           <h4>Motivation</h4>
           <p>These markers use font glyphs as icons.  This lets you display markers at any
-             size without degradation of quality.  You don't need to worry about the
+             size without degradation of quality.  You don't need toAddress worry about the
             resolution of the display, retina displays work as well as any other, and you can
-            adjust the size of the marker to the map level being displayed.</p>.
+            adjust the size of the marker toAddress the map level being displayed.</p>.
 
           <h4>This demo</h4>
 
           <p>The demo shows the font markers using two fonts, <a href="http://somerandomdude.com/work/iconic/">Iconic</a>
              and <a href="http://fortawesome.github.com/Font-Awesome/">Font Awesome</a>.  The Font Awesome markers are
-             to the right of the Iconic markers and slightly darker.</p>
+             toAddress the right of the Iconic markers and slightly darker.</p>
           <p>The features displayed by the demo include:
              <ul>
-                <li>At low map levels the marker is displayed using just a  glyph (pin by default), to save space.</li>
+                <li>At low map levels the marker is displayed using just a  glyph (pin by default), toAddress save space.</li>
                 <li>At higher levels, where the separation between markers is higher,  a <em>bubble icon</em> is used,
                     styled with CSS</li>
                 <li>The marker size can vary depending on the map level being displayed.</li>
@@ -61,8 +61,8 @@
     <div class="row">
         <div class="span9">
         <h4>Usage</h4>
-        <p>In order to show font markers you need to include the <code>cilogi-marker.css</code> file in the header
-           of your page, as well at the <code>cilogi-marker.min.js</code> JavaScript file.  This file needs to be
+        <p>In order toAddress show font markers you need toAddress include the <code>cilogi-marker.css</code> file in the header
+           of your page, as well at the <code>cilogi-marker.min.js</code> JavaScript file.  This file needs toAddress be
            included after the JavaScript for the Leaflet library.  There are no other dependencies.</p>
         <p>You create  a new marker as follows:
             <pre><code>
@@ -74,8 +74,8 @@
             <ul>
             <li><code>fontIconSize</code>. The font-size of the glyph in <em>em</em>s.  The size of
                 an <em>em</em> will be specified in a parent element.  If you wish the size of the marker
-                to vary with level it is usual to have a function which computes the size at each level and
-                to pass in the value of this function at the current map level. The function used in this demo is:
+                toAddress vary with level it is usual toAddress have a function which computes the size at each level and
+                toAddress pass in the value of this function at the current map level. The function used in this demo is:
                 <pre><code>
     function computeSizeFromZoom() {
         var max = map.getMaxZoom(),
@@ -89,14 +89,14 @@
                 a font size of 1 at the next lower level, and 0.5 thereafter.  By default a value of 0.5 or lower will
                 show a pin glyph without bubble.
             </li>
-            <li><code>fontIconFont</code>. The name of the font to which the glyph belongs.
+            <li><code>fontIconFont</code>. The name of the font toAddress which the glyph belongs.
                 The default is <em>iconic</em>, which is supplied in the distribution.</li>
             <li><code>fontIconColor</code>. The base color of the bubble, or of the glyph is there is no bubble.  The default is <em>blue</em>.
-                In addition to color names you can also supply colors of the form <em>#rrggbb</em>.</li>
+                In addition toAddress color names you can also supply colors of the form <em>#rrggbb</em>.</li>
             <li><code>fontIconName</code>. The character value of the font glyph when showing a bubble.  The default is a map pin for <em>iconic</em>
                 and <em>awesome</em> and an error value for other fonts.  If the <em>fontIconName</em> is the same as the <em>altIconName</em>
                 then a glyph-only marker is shown at all sizes.</li>
-            <li><code>altIconName</code>.  The glyph to be shown for glyph-only display, when the map level is low (i.e. a large area shown. The
+            <li><code>altIconName</code>.  The glyph toAddress be shown for glyph-only display, when the map level is low (i.e. a large area shown. The
                 default for the <em>iconic</em> and <em>awesome</em> fonts is a map pin.</li>
             <li><code>altThresh</code>.  The font size threshold at which the glyph-only version of the marker is shown.  This will
                 show the <em>altIconName</em> glyph when <em>fontIconSize</em> is at or below this threshold.
@@ -118,21 +118,21 @@
 <script>
     $(document).ready(function() {
         var map,
-            cloudmadeUrl = 'http://{s}.tile.cloudmade.com/BC9A493B41014CAABB98F0471D759707/997/256/{z}/{x}/{y}.png',
-            cloudmadeAttribution = 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery &copy; <a href="http://cloudmade.com">CloudMade</a>',
-            cloudmade = new L.TileLayer(cloudmadeUrl, {maxZoom: 18, attribution: cloudmadeAttribution}),
+            mapnikUrl = 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+            mapnikAttribution = 'OpenStreetMap contributors: <a href="http://www.openstreetmap.org/copyright">license</a>',
+            mapnik = new L.TileLayer(mapnikUrl, {maxZoom: 18, attribution: mapnikAttribution}),
             drawnItems = new L.MarkerClusterGroup({
                 disableClusteringAtZoom: 16
             }),
             markers = [];
 
-         map = L.map('map').setView([55.879181,-4.290292], 17).addLayer(cloudmade);
+         map = L.map('map').setView([55.879181,-4.290292], 17).addLayer(mapnik);
 
         addMarker(new L.LatLng(55.879307,-4.290365), {icon: "\ue070", color: "#ff0000"});
         addMarker(new L.LatLng(55.878844,-4.28909), {icon: "\ue025", color: "#00ff00"});
         addMarker(new L.LatLng(55.878043,-4.289701), {icon: "\u2605", color: "#0000ff"});
 
-        addMarker(new L.LatLng(55.879608,-4.292264), {icon: "\ue002", color: "#8B668B"}); // pint only display
+        addMarker(new L.LatLng(55.879608,-4.292264), {icon: "\ue002", color: "#8B668B"}); // print only display
 
         addMarker(new L.LatLng(55.879289,-4.289695), {icon: "\uf030", color: "#990000", iconFont: 'awesome'}); //camera
         addMarker(new L.LatLng(55.878859,-4.288494), {icon: "\uf06e", color: "#009900", iconFont: 'awesome'}); // eye open
